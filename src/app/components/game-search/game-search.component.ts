@@ -15,6 +15,7 @@ export class GameSearchComponent implements OnInit {
   games: Game[] = [];
   ownedGames: { [id: string]: Game } = {};
   wishListGames: { [id: string]: Game } = {};
+
   constructor(
     private gameService: GameService,
     private localStorageService: LocalStorageService
@@ -36,5 +37,31 @@ export class GameSearchComponent implements OnInit {
     this.gameService
       .searchByName(this.searchText)
       .subscribe((games) => (this.games = games));
+  }
+
+  updateOwnedList(event: MouseEvent, game: Game) {
+    event.stopPropagation();
+
+    if (this.ownedGames[game.id]) {
+      this.localStorageService.deleteGame(game, ListType.OWNEDLIST);
+    } else {
+      if (this.wishListGames[game.id]) {
+        this.localStorageService.deleteGame(game, ListType.WISHLIST);
+      }
+      this.localStorageService.saveGame(game, ListType.OWNEDLIST);
+    }
+  }
+
+  updateWishlist(event: MouseEvent, game: Game) {
+    event.stopPropagation();
+
+    if (this.wishListGames[game.id]) {
+      this.localStorageService.deleteGame(game, ListType.WISHLIST);
+    } else {
+      if (this.ownedGames[game.id]) {
+        this.localStorageService.deleteGame(game, ListType.OWNEDLIST);
+      }
+      this.localStorageService.saveGame(game, ListType.WISHLIST);
+    }
   }
 }
