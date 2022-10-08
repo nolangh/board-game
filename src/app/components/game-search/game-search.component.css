@@ -1,0 +1,13 @@
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search-container button {
+  height: 52px;
+  margin-left: 5px;
+}
+.search-container .mat-form-field {
+  width: 50%;
+  margin-top: 16px;
+}/*# sourceMappingURL=game-search.component.css.map */
