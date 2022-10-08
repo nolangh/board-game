@@ -15,6 +15,15 @@
             <mat-card-content>
                 <div>{{game?.description_preview | slice: 0:80}} ...</div>
             </mat-card-content>
+            <mat-card-actions>
+                <button mat-mini-fab color="primary" matTooltip="Add to list of owned games"
+                    (click)="updateOwnedList($event, game)">
+                    <mat-icon class="material-icons-outlined">verified</mat-icon>
+                </button>
+                <button mat-mini-fab matTooltip="Add to wishlist" (click)="updateWishlist($event, game)">
+                    <mat-icon>switch_access_shortcut</mat-icon>
+                </button>
+            </mat-card-actions>
         </mat-card>
     </div>
 </div>

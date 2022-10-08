@@ -14,7 +14,7 @@ export class LocalStorageService {
 
   saveGame(game: Game, listType: ListType) {
     let gameList: Game[] = JSON.parse(
-      window.localStorage.getItem(listType.valueOf())
+      window.localStorage.getItem(listType.valueOf())!
     );
     if (!gameList) {
       gameList = [game];
@@ -24,7 +24,7 @@ export class LocalStorageService {
     window.localStorage.setItem(listType.valueOf(), JSON.stringify(gameList));
 
     const parsedUpdateList = JSON.parse(
-      window.localStorage.getItem(listType.valueOf())
+      window.localStorage.getItem(listType.valueOf()) || '{}'
     );
     if (listType === ListType.OWNEDLIST) {
       this.ownedGames.next(parsedUpdateList);
@@ -35,7 +35,7 @@ export class LocalStorageService {
 
   deleteGame(game: Game, listType: ListType) {
     let gameList: Game[] = JSON.parse(
-      window.localStorage.getItem(listType.valueOf())
+      window.localStorage.getItem(listType.valueOf()) || '{}'
     );
     const gameIndex = gameList.findIndex((currGame) => currGame.id === game.id);
     if (gameIndex > -1) {
@@ -51,7 +51,9 @@ export class LocalStorageService {
   }
 
   getGameList(listType: ListType) {
-    let list = JSON.parse(window.localStorage.getItem(listType.valueOf()));
+    let list = JSON.parse(
+      window.localStorage.getItem(listType.valueOf()) || '{}'
+    );
 
     if (listType === ListType.OWNEDLIST) {
       this.ownedGames.next(!list ? [] : list);
