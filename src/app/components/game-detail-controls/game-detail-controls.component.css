@@ -1,0 +1,19 @@
+.controls {
+  border: 1px solid gray;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+button {
+  margin-bottom: 8px;
+}
+
+.status {
+  display: flex;
+  margin: auto;
+}
+.status > div:first-child {
+  margin-right: 5px;
+}/*# sourceMappingURL=game-detail-controls.component.css.map */
